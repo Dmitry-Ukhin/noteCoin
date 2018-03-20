@@ -9,29 +9,67 @@
 		<script src="scripts/script.js"></script>
 		<script src="scripts/display_tr.js"></script>
 		<script src="scripts/removeTran.js"></script>
+        <script src="scripts/commandLine.js"></script>
 		<style>
-			.display-tran{
-				position: absolute;
-				top: 40px;
-				right: 80px;
-				margin: auto;
-			}
-			.version{
+            .version{
 				position: static;
 				text-align: center;
 			}
-			.table-trans{
+            .display-tran{
+				position: absolute;
+				top: 100px;
+				right: 80px;
+				margin: auto;
+			}
+            .save-tran{
+				position: absolute;
+				top: 100px;
+				right: 78%;
+				margin: auto;
+			}
+            .table-trans{
 				position: absolute;
 				margin: 0;
 				left: 30%;
 				top: 80%;
 			}
+            .command-block{
+                position: absolute;
+                right: 30%;
+                top: 55px;
+                width: 450px;
+                height: 30px;
+                float: left;
+            }
+            .h4Command{
+                position: relative;
+                /*right: 20px;*/
+                margin-top: -20px;
+                margin-right: 10px;
+                float: left;
+            }
+            .form-command{
+			}
 		</style>
 	</head>
 	<body>
 		<div id="version" class="version">
-			<h2>v0.2 PreAlpha b:20.03.18</h2>
+			<h2>v0.3 PreAlpha b:20.03.18</h2>
 		</div>
+        <div class="command-block">
+            <div class="h4Command">
+                <h4>Your question:</h4>
+            </div>
+            <div id="form-command" class="form-command">
+
+                <form id="command_line" action="/command">
+                    <label for="command">
+                    <input type="text" name="command" id="command" size="30">
+                    </label>
+                    <input type="button" value="OK" onclick="sendCommand()">
+                </form>
+            </div>
+        </div>
 		<div id="save-tran" class="save-tran">
             <h4>Save Transaction</h4>
 			<form id="formForSaveTransaction" action="/save_tran">
@@ -49,7 +87,7 @@
 
 				<p>description</p>
 				<label for="description">
-				<textarea id="description" name="description" cols="50" rows="3"></textarea>
+				<textarea id="description" name="description" cols="30" rows="3"></textarea>
 				</label>
 
 				<p>

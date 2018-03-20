@@ -3,8 +3,8 @@
  */
 package com.noteCoin.controllers;
 
-import com.noteCoin.data.WorkWithDB;
 import com.noteCoin.data.WorkWithMySQL;
+import com.noteCoin.data.interfaces.WorkWithDB;
 import com.noteCoin.models.Transaction;
 
 import javax.servlet.ServletException;
@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RemoveTransaction extends HttpServlet{
@@ -32,14 +29,18 @@ public class RemoveTransaction extends HttpServlet{
         requestToDB += "date LIKE \'" + date + "\' AND ";
         requestToDB += "descr LIKE \'" + descr + "\'";
 
-        WorkWithDB dataBase = new WorkWithMySQL();
-        List<Transaction> transactions = dataBase.loadFromDB(requestToDB);
-        dataBase.reloadConnectWithDB();
-        Integer status = dataBase.removeTransaction(transactions.get(0));
-        if (status == 1){
-            resp.getWriter().println("success");
-        }else{
-            resp.getWriter().println("removing is fail");
+        try {
+            WorkWithDB dataBase = new WorkWithMySQL();
+            List transactions = dataBase.load(requestToDB);
+            dataBase.reloadConnectWithDB();
+            Integer status = dataBase.remove(transactions.get(0));
+            if (status == 1) {
+                resp.getWriter().println("success");
+            } else {
+                resp.getWriter().println("removing is fail");
+            }
+        }catch (Exception ex){
+            ex.getMessage();
         }
     }
 

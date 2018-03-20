@@ -1,7 +1,7 @@
 /**
  * last change 12.03.18 20:14
  */
-package com.noteCoin.parser;
+package com.noteCoin.controllers;
 
 import java.io.IOException;
 import java.util.List;

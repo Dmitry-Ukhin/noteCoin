@@ -4,8 +4,8 @@
 package com.noteCoin.controllers;
 
 import com.google.gson.Gson;
-import com.noteCoin.data.WorkWithDB;
 import com.noteCoin.data.WorkWithMySQL;
+import com.noteCoin.data.interfaces.WorkWithDB;
 import com.noteCoin.models.Transaction;
 
 import javax.servlet.ServletException;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 public class ShowTransactions extends HttpServlet{
@@ -100,14 +99,19 @@ public class ShowTransactions extends HttpServlet{
         String json;
 
         WorkWithDB dataBase = new WorkWithMySQL();
-        List<Transaction> transactionList = dataBase.loadFromDB(requestToDB);
-        if (transactionList != null) {
-            for (Transaction tr : transactionList) {
-                json = gson.toJson(tr);
-                resp.getWriter().printf(json);
+        List<Object> transactionList = dataBase.load(requestToDB);
+        try {
+            if (transactionList != null) {
+                for (int i = 0; i < transactionList.size(); i++) {
+                    Transaction tr = (Transaction)transactionList.get(i);
+                    json = gson.toJson(tr);
+                    resp.getWriter().printf(json);
+                }
+            } else {
+                resp.getWriter().println("Download is fail");
             }
-        }else{
-            resp.getWriter().println("Download is fail");
+        }catch(Exception ex){
+            ex.getMessage();
         }
     }
 }

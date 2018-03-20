@@ -3,18 +3,17 @@
  */
 package com.noteCoin.data;
 
+import com.noteCoin.data.interfaces.WorkWithDB;
+import com.noteCoin.models.KeyWord;
 import com.noteCoin.models.Transaction;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
-import static javax.swing.text.html.HTML.Tag.HEAD;
-
-public class WorkWithMySQL implements WorkWithDB{
+public class WorkWithMySQL implements WorkWithDB {
 
     private EntityManagerFactory emf;
     private EntityManager em;
@@ -31,16 +30,26 @@ public class WorkWithMySQL implements WorkWithDB{
 
     /**
      * TODO: overload for upload list Transactions to DB
-     * @param transaction
+     * @param object
      */
-    public Integer saveToDB(Transaction transaction) {
+    public Integer save(Object object) {
         Integer status;
 
         em.getTransaction().begin();
         try {
-            em.persist(transaction);//I save my model of Transaction to db
-            em.getTransaction().commit();
-            status = 1;
+            if (object.getClass() == Transaction.class) {
+                Transaction transaction = (Transaction) object;
+                em.persist(transaction);//I save my model of Transaction to db
+                em.getTransaction().commit();
+                status = 1;
+            }else if (object.getClass() == KeyWord.class){
+                KeyWord keyWord = (KeyWord) object;
+                em.persist(keyWord);//I save my model of KeyWord to db
+                em.getTransaction().commit();
+                status = 1;
+            }else{
+                status = 0;
+            }
         }catch (Exception ex){
             em.getTransaction().rollback();
             status = 0;
@@ -51,16 +60,11 @@ public class WorkWithMySQL implements WorkWithDB{
         return status;
     }
 
-    public List<Transaction> loadFromDB(String requestToDB) {
+    public List load(String requestToDB) {
         try {
             Query query = em.createQuery(requestToDB);
             List list = query.getResultList();
-            List<Transaction> transactionList = new ArrayList<Transaction>();
-            for (Object obj : list){
-                Transaction tr = (Transaction)obj;
-                transactionList.add(tr);
-            }
-            return transactionList;
+            return list;
         }catch (Exception ex){
             ex.printStackTrace();
             return null;
@@ -70,12 +74,30 @@ public class WorkWithMySQL implements WorkWithDB{
         }
     }
 
-    public Integer removeTransaction(Transaction transaction) {
+    public Object find(String searchWord) {
+        try{
+            KeyWord keyWord = em.find(KeyWord.class, searchWord);
+            if (keyWord != null){
+                return keyWord;
+            }else{
+                return null;
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }finally{
+            em.close();
+            emf.close();
+        }
+        return null;
+    }
+
+    public Integer remove(Object object) {
         Integer status;
-        Long transactionId = transaction.getId();
 
         em.getTransaction().begin();
         try{
+            Transaction transaction = (Transaction)object;
+            Long transactionId = transaction.getId();
             Transaction tr = em.find(Transaction.class, transactionId);
             if (tr != null) {
                 em.remove(tr);

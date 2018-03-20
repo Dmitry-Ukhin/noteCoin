@@ -1,5 +1,5 @@
 <!--
-    last change 18.03.18 21:58
+    last change 20.03.18 16:23
 -->
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
 	<display-name>noteCoin</display-name>
@@ -32,5 +32,13 @@
         <servlet-name>remove</servlet-name>
         <url-pattern>/remove</url-pattern>
     </servlet-mapping>
+	<servlet>
+		<servlet-name>parser</servlet-name>
+		<servlet-class>com.noteCoin.controllers.CommandLine</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>parser</servlet-name>
+		<url-pattern>/command</url-pattern>
+	</servlet-mapping>
 
 </web-app>

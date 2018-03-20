@@ -4,8 +4,8 @@
 package com.noteCoin.controllers;
 
 import com.noteCoin.data.FactoryTransaction;
-import com.noteCoin.data.WorkWithDB;
 import com.noteCoin.data.WorkWithMySQL;
+import com.noteCoin.data.interfaces.WorkWithDB;
 import com.noteCoin.models.Transaction;
 
 import javax.servlet.ServletException;
@@ -46,7 +46,7 @@ public class SaveTransaction extends HttpServlet{
         Send transaction to data base
          */
         WorkWithDB dataBase = new WorkWithMySQL();
-        Integer status = dataBase.saveToDB(transaction);
+        Integer status = dataBase.save(transaction);
 
         if (status != 1){
             writer.println("Failed, try again");
