@@ -13,7 +13,7 @@ public interface WorkWithDB {
 
     public Integer remove(Object object);
 
-    public Object find(String searchWord);
+    public List find(Class nameClass, String key, String value);
 
     public void reloadConnectWithDB();
 }
