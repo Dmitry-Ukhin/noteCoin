@@ -1,5 +1,7 @@
 package com.noteCoin.models;
 
+import jdk.nashorn.internal.objects.annotations.Constructor;
+
 import javax.persistence.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -20,8 +22,7 @@ public class Command {
     @Column(name = "command")
     private String command;
 
-    public Command() {
-    }
+    public Command() {}
 
     public Command(String type, String command) {
         if (command != null) {
@@ -53,19 +54,7 @@ public class Command {
     }
 
     public List<String> commandToArray(){
-//        command += " ";
-//        Integer start = 0, end = 0;
         return new ArrayList<String>(Arrays.asList(command.split(" ")));
 
-//        for (;start < command.length();start = end){
-//            System.out.println("COMMAND57 start=" + start + "end=" + end + " length=" + command.length());
-//            if (end < command.length()) {
-//                end = command.indexOf(" ", start) + 1;
-//            }else{
-//                listWords.add(command.substring(start, command.length()));
-//            }
-//            listWords.add(command.substring(start, end));
-//        }
-//        return listWords;
     }
 }

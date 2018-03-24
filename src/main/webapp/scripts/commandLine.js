@@ -5,9 +5,7 @@ function sendCommand(command) {
     var isAsynchr = true;
     var data;
 
-    // alert("COMMAND IS " + command);
     if (command !== null) {
-        // alert("COMMAND IS NULL");
         var form = document.getElementById("command");
         data = "command=" + form.value;
     }else{
@@ -22,10 +20,7 @@ function sendCommand(command) {
             }
         }
         data += "&type=" + type;
-    }else{
-        // alert("TYPE IS NULL");
     }
-    alert(data);
 
     /*
     Send request
@@ -44,7 +39,6 @@ function sendCommand(command) {
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             if (this.responseText.indexOf("1") + 1){
-                // alert("CALL ASK_TYPE");
                 askType(document.getElementById("command"));
             }else{
                 document.getElementById("status-command").innerHTML = this.responseText;

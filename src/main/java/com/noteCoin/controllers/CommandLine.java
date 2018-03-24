@@ -3,6 +3,7 @@ package com.noteCoin.controllers;
 import com.noteCoin.data.WorkWithMySQL;
 import com.noteCoin.data.interfaces.WorkWithDB;
 import com.noteCoin.models.Command;
+import com.noteCoin.models.Transaction;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,7 +28,10 @@ public class CommandLine extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Date date = new Date();
+        Transaction transaction;
         PrintWriter writer = resp.getWriter();
+        String descriptionOfTran;
         String paramCommand = req.getParameter("command");
         String paramType = req.getParameter("type");
 
@@ -58,6 +62,8 @@ public class CommandLine extends HttpServlet{
                 writer.println(status);
                 return;
             }
+            descriptionOfTran = getDescriptionOfTransaction(command.getCommand());
+            transaction = getTransaction(command.getType(), Integer.parseInt(sum), date, descriptionOfTran);
         }
 
         WorkWithDB dataBase = new WorkWithMySQL();
@@ -69,6 +75,11 @@ public class CommandLine extends HttpServlet{
         }
         writer.println(status);
         writer.close();
+    }
+
+    private String getDescriptionOfTransaction(String command) {
+
+        return null;
     }
 
     private String checkSum(List<String> words) {
@@ -129,5 +140,9 @@ public class CommandLine extends HttpServlet{
         }else{
             return null;
         }
+    }
+
+    private Transaction getTransaction(String type, Integer sum, Date date, String description){
+        return new Transaction(type, sum, date, description);
     }
 }
