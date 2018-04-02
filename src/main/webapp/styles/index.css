@@ -60,3 +60,108 @@ Clear Blocks
     background: white;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
+
+/*>>>>>>>>>>>>>>>>
+Authorization
+<<<<<<<<<*/
+.authorization{
+    position: absolute;
+    top: 26%;
+    left: 32%;
+
+    background: white;
+    width: 500px;
+    height: 300px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+    z-index: 20;
+}
+
+.headerAuth{
+    font-family: 'Josefin Sans', sans-serif;
+
+    position: relative;
+    width: 100%;
+    height: 30%;
+    margin-top: -21px;!important;
+    top: 0;!important;
+    background: rgba(0, 171, 255, 0.73);
+    color: white;
+    text-align: center;
+}
+
+.userName, .userPass{
+    position: absolute;
+    font-family: 'Josefin Sans', sans-serif;
+    outline: none;
+
+    height: 20px;
+    width: 150px;
+    font-size: 18px;
+
+    border: none;
+    border-bottom: 1px solid #356ec8;
+    transition: all 0.3s cubic-bezier(.64,.09,.08,1);
+}
+
+.userName:focus, .userPass:focus{
+    height: 30px;
+    transition: all 0.3s cubic-bezier(.64,.09,.08,1);
+}
+
+.userName:focus::-webkit-input-placeholder, .userPass:focus::-webkit-input-placeholder{
+    color: #356ec8;
+}
+
+#userName{
+    top: 140px;
+    left: 180px;
+}
+
+#userPass{
+    top: 180px;
+    left: 180px;
+}
+
+.buttonAuth, .buttonReg{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 18px;
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    top: 80%;
+    left: 70%;
+
+    outline: none;
+
+    border: none;
+    background: none;
+    color: #0080FF;
+    transition: all 0.3s cubic-bezier(.64,.09,.08,1);
+}
+
+.buttonReg{
+    left: 9%;!important;
+}
+
+/*###########
+Button Auth
+###########*/
+@keyframes hideElement {
+    0%{opacity: .1;}
+    10%{opacity: .2;}
+    20%{opacity: .3;}
+    30%{opacity: .4;}
+    40%{opacity: .5;}
+    50%{opacity: .6;}
+    60%{opacity: .7;}
+    70%{opacity: .8;}
+    80%{opacity: .9;}
+    90%{opacity: 1;}
+}
+
+.buttonAuth:hover, .buttonReg:hover{
+    background: rgba(0, 128, 255, 0.16);
+    transition: all 0.3s cubic-bezier(.64,.09,.08,1);
+}
+

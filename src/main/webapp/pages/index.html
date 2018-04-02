@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116702748-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-116702748-1');
+    </script>
+
     <meta charset="UTF-8">
     <title>noteCoin</title>
     <!--Import templates-->
@@ -17,17 +27,65 @@
     <!--Import scripts-->
     <script src="../scripts/saveTran.js"></script>
     <script src="../scripts/lastTrans.js"></script>
+    <script src="../scripts/authorization.js"></script>
     <!--Other imports-->
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
 <body>
+    <!--Authorization-->
+    <div class="authorization" id="div-authorization">
+        <div id="headerAuth" class="headerAuth">
+            <h4>Welcome to the noteCoin</h4>
+            <p class="text1">I recommend that you remember your login and password</p>
+        </div>
+        <form id="authorization" method="post" action="/user"></form>
+
+        <div class="div-userName">
+            <input id="userName" form="authorization" name="name" class="userName" type="text" placeholder="Name"/>
+            <label for="userName"></label>
+        </div>
+
+        <div class="div-userPass">
+            <input id="userPass" form="authorization" name="key" class="userPass" type="password" placeholder="Password"/>
+            <label for="userPass"></label>
+        </div>
+
+        <input type="button" form="authorization" class="buttonAuth" id="buttonAuth" value="Log in" onclick="reloadButAuth();">
+        <script>
+            function reloadButAuth() {
+                logIn();
+                var elm = document.getElementById("buttonAuth");
+                elm.style.animation = "hideElement .7s";
+                var newone = elm.cloneNode(true);
+                elm.parentNode.replaceChild(newone, elm);
+            }
+        </script>
+        <input type="button" class="buttonReg" id="buttonReg" value="Sign up" onclick="reloadButReg();">
+        <script>
+            function reloadButReg() {
+                signUp();
+                var elm = document.getElementById("buttonReg");
+                elm.style.animation = "hideElement .7s";
+                var newone = elm.cloneNode(true);
+                elm.parentNode.replaceChild(newone, elm);
+            }
+        </script>
+    </div>
+    <div class="globalShadow" id="globalShadow" onclick="deleteAll()">
+        <script type="text/javascript">
+            function deleteAll() {
+                document.querySelector("#div-authorization").remove();
+                document.querySelector("#globalShadow").remove();
+            }
+        </script>
+    </div>
     <!--logo-->
     <div class="logo">
         <img src="../resources/logo(noteCoin).png" width="500" , height="125">
     </div>
     <!--version-->
     <div id="version" class="version">
-        <h5>v0.2.1 PreAlpha b:27.03.18</h5>
+        <h5>v1.0 PreAlpha b:31.03.18</h5>
     </div>
     <!--blocks-->
     <div class="block">

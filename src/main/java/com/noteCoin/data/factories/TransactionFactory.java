@@ -1,7 +1,7 @@
 /**
  * last change 12.03.18 20:13
  */
-package com.noteCoin.data;
+package com.noteCoin.data.factories;
 
 import java.util.Date;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.lang.Integer;
 
 import com.noteCoin.models.Transaction;
 
-public class FactoryTransaction{
+public class TransactionFactory {
 /**
 *method createTransaction gets sorted List 
 *List[0] = type of transaction
