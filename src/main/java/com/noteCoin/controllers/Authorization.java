@@ -23,28 +23,15 @@ public class Authorization extends HttpServlet{
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
         String pass = req.getParameter("key");
+        Integer int_hashPass = pass.hashCode();
+        String str_hashPass = int_hashPass.toString();
 
         HttpSession session = req.getSession();
         String sessionId = session.getId();
 
-        Integer hashPass = pass.hashCode();
-
         Date date = new Date();
 
-        Map<String, String> args = new HashMap<String, String>();
-        args.put("name", name);
-        args.put("pass", hashPass.toString());
-
-        String query = "From Users ";
-        query = query.concat("WHERE ");
-        for (String key : args.keySet()) {
-            query = query.concat(key + " LIKE \'" + args.get(key) + "%\' AND ");
-        }
-        Integer lastIndexOf = query.lastIndexOf("AND");
-        if (lastIndexOf < query.length() - 3) {
-            query = query.substring(0, lastIndexOf);
-        }
-        query = query.concat("ORDER BY date DESC");
+        String query = "Select * From Users WHERE name=\'" + name + "\' AND pass=" + str_hashPass;
 
         UserDAO userDAO = new UserDAOHibernate();
         List<User> userList = userDAO.getList(query);
@@ -52,12 +39,19 @@ public class Authorization extends HttpServlet{
             userList.get(0).setLastEnter(date);
             User update = userDAO.update(userList.get(0));
             if (null != update) {
-                resp.getWriter().println("STAT: 200//" + sessionId);
+                resp.getWriter().println("STAT: 200");
             }else{
-                resp.getWriter().println("STAT: 501//" + sessionId);
+                resp.getWriter().println("STAT: 501");
             }
         }else{
-            resp.getWriter().println("STAT: 403//" + sessionId);
+            Integer size;
+            if (userList != null){
+                size = userList.size();
+            }else{
+                size = null;
+            }
+
+            resp.getWriter().println("STAT: 403//" + size);
         }
 
 

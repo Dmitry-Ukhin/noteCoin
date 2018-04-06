@@ -31,6 +31,7 @@ function logIn() {
 
     xhr.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
+            alert("resp:" + xhr.responseText);
             if (xhr.responseText.indexOf("200") + 1){
                 document.querySelector("#div-authorization").remove();
                 document.querySelector("#globalShadow").remove();

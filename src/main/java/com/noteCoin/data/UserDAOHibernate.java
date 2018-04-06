@@ -76,7 +76,8 @@ public class UserDAOHibernate implements UserDAO{
         EntityManager em = connection.getConnectionPostgreSQL();
 
         try {
-            Query objQuery = em.createQuery(strQuery);
+//            Query objQuery = em.createQuery(strQuery);
+            Query objQuery = em.createNativeQuery(strQuery);
             List list = objQuery.getResultList();
             List<User> userList = new ArrayList<User>();
             for (Object obj : list){
@@ -85,7 +86,6 @@ public class UserDAOHibernate implements UserDAO{
             }
             return userList;
         }catch (Exception ex){
-            ex.printStackTrace();
             return null;
         }finally {
             connection.closeConnect();
