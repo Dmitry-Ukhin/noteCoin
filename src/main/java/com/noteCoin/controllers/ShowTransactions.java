@@ -46,7 +46,9 @@ public class ShowTransactions extends HttpServlet{
 
         Map<String, String> args = new HashMap<String, String>();
         args.put("type", type);
-        args.put("date", date);
+        if(!date.equals("%-%-%")){
+            args.put("date", date);
+        }
         args.put("descr", descr);
 
 
