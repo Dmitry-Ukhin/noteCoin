@@ -12,6 +12,11 @@
     </script>
 
     <meta charset="UTF-8">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id"
+          content="952926237350-nm6l0h72hi86onaafedh87j8schgdhcs.apps.googleusercontent.com">
+
+
     <title>noteCoin</title>
     <!--Import templates-->
     <link id="lastTrans" href="pages/template/tmplLastTrans.html" rel="import">
@@ -31,6 +36,7 @@
     <script src="scripts/lastTrans.js"></script>
     <script src="scripts/authorization.js"></script>
 
+        <!--Google Oauth-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!--Other imports-->
@@ -40,63 +46,31 @@
     <!--Authorization-->
     <div class="authorization" id="div-authorization">
         <div id="headerAuth" class="headerAuth">
-            <h4>Welcome to the noteCoin</h4>
-            <p class="text1">I recommend that you remember your login and password</p>
+            <h4 class="headerAuth-h4">Welcome to the noteCoin</h4>
         </div>
-        <!--<form id="authorization" method="post" action="/user"></form>-->
-
-        <!--<div class="div-userName">-->
-            <!--<input id="userName" form="authorization" name="name" class="userName" type="text" placeholder="Name"/>-->
-            <!--<label for="userName"></label>-->
-        <!--</div>-->
-
-        <!--<div class="div-userPass">-->
-            <!--<input id="userPass" form="authorization" name="key" class="userPass" type="password" placeholder="Password"/>-->
-            <!--<label for="userPass"></label>-->
-        <!--</div>-->
-
-        <!--<input type="button" form="authorization" class="buttonAuth" id="buttonAuth" value="Log in" onclick="reloadButAuth();">-->
-        <!--<script>-->
-            <!--function reloadButAuth() {-->
-                <!--logIn();-->
-                <!--var elm = document.getElementById("buttonAuth");-->
-                <!--elm.style.animation = "hideElement .7s";-->
-                <!--var newone = elm.cloneNode(true);-->
-                <!--elm.parentNode.replaceChild(newone, elm);-->
-            <!--}-->
-        <!--</script>-->
-        <!--<input type="button" class="buttonReg" id="buttonReg" value="Sign up" onclick="reloadButReg();">-->
-        <!--<script>-->
-            <!--function reloadButReg() {-->
-                <!--signUp();-->
-                <!--var elm = document.getElementById("buttonReg");-->
-                <!--elm.style.animation = "hideElement .7s";-->
-                <!--var newone = elm.cloneNode(true);-->
-                <!--elm.parentNode.replac   eChild(newone, elm);-->
-            <!--}-->
-        <!--</script>-->
         <div class="g-signin2" data-onsuccess="onSignIn"></div>
         <script>
-	function onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId());
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail());
-      console.log('id_token: ' + googleUser.getAuthResponse().id_token);
+        <!--COPY-PASTE-->
+            function onSignIn(googleUser) {
+              var profile = googleUser.getBasicProfile();
+              console.log('ID: ' + profile.getId());
+              console.log('Name: ' + profile.getName());
+              console.log('Image URL: ' + profile.getImageUrl());
+              console.log('Email: ' + profile.getEmail());
+              console.log('id_token: ' + googleUser.getAuthResponse().id_token);
 
-     //do not post above info to the server because that is not safe.
-     //just send the id_token
+             //do not post above info to the server because that is not safe.
+             //just send the id_token
 
-      var redirectUrl = 'login';
-      //using jquery to post data dynamically
-      var form = $('<form action="' + redirectUrl + '" method="post">' +
-                          '<input type="text" name="id_token" value="' +
-                           googleUser.getAuthResponse().id_token + '" />' +
-                                                                '</form>');
-    $('body').append(form);
-    form.submit();
-    }
+              var redirectUrl = 'login';
+              //using jquery to post data dynamically
+              var form = $('<form action="' + redirectUrl + '" method="post">' +
+                                  '<input type="text" name="id_token" value="' +
+                                   googleUser.getAuthResponse().id_token + '" />' +
+                                                                        '</form>');
+            $('body').append(form);
+            form.submit();
+            }
 
 	</script>
     </div>

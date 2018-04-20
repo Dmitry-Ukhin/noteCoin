@@ -71,7 +71,7 @@ Authorization
     top: 26%;
     left: 32%;
 
-    background: white;
+    background: #f5f5f5;
     width: 500px;
     height: 300px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -89,10 +89,22 @@ Authorization
     top: 0;!important;
     background: rgba(0, 171, 255, 0.73);
     color: white;
-    text-align: center;
 }
 
-.userName, .userPass{
+.headerAuth-h4{
+    position: relative;
+    text-align: center;
+    top: 40px;
+}
+
+.g-signin2 {
+    position: relative;
+
+    left: 35%;
+    top: 20%;
+}
+
+/*.userName, .userPass{
     position: absolute;
     font-family: 'Josefin Sans', sans-serif;
     outline: none;
@@ -144,12 +156,12 @@ Authorization
 
 .buttonReg{
     left: 9%;!important;
-}
+}*/
 
 /*###########
 Button Auth
 ###########*/
-@keyframes hideElement {
+/*@keyframes hideElement {
     0%{opacity: .1;}
     10%{opacity: .2;}
     20%{opacity: .3;}
@@ -165,5 +177,5 @@ Button Auth
 .buttonAuth:hover, .buttonReg:hover{
     background: rgba(0, 128, 255, 0.16);
     transition: all 0.3s cubic-bezier(.64,.09,.08,1);
-}
+}*/
 
