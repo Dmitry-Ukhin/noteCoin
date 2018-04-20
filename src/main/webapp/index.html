@@ -18,16 +18,21 @@
     <link id="newTran" href="pages/template/tmplNewTran.html" rel="import">
     <link id="showTrans" href="pages/template/tmplShowTrans.html" rel="import">
     <link id="listTrans" href="pages/template/tmplListTrans.html" rel="import">
+    <link id="updatesBlock" href="pages/template/tmplUpdates.html" rel="import">
     <!--Import stylesheets-->
     <link href="styles/index.css" rel="stylesheet">
     <link href="styles/newTran.css" rel="stylesheet">
     <link href="styles/lastTrans.css" rel="stylesheet">
     <link href="styles/showTrans.css" rel="stylesheet">
     <link href="styles/listTrans.css" rel="stylesheet">
+    <link href="styles/updates.css" rel="stylesheet">
     <!--Import scripts-->
     <script src="scripts/saveTran.js"></script>
     <script src="scripts/lastTrans.js"></script>
     <script src="scripts/authorization.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <!--Other imports-->
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
@@ -38,38 +43,62 @@
             <h4>Welcome to the noteCoin</h4>
             <p class="text1">I recommend that you remember your login and password</p>
         </div>
-        <form id="authorization" method="post" action="/user"></form>
+        <!--<form id="authorization" method="post" action="/user"></form>-->
 
-        <div class="div-userName">
-            <input id="userName" form="authorization" name="name" class="userName" type="text" placeholder="Name"/>
-            <label for="userName"></label>
-        </div>
+        <!--<div class="div-userName">-->
+            <!--<input id="userName" form="authorization" name="name" class="userName" type="text" placeholder="Name"/>-->
+            <!--<label for="userName"></label>-->
+        <!--</div>-->
 
-        <div class="div-userPass">
-            <input id="userPass" form="authorization" name="key" class="userPass" type="password" placeholder="Password"/>
-            <label for="userPass"></label>
-        </div>
+        <!--<div class="div-userPass">-->
+            <!--<input id="userPass" form="authorization" name="key" class="userPass" type="password" placeholder="Password"/>-->
+            <!--<label for="userPass"></label>-->
+        <!--</div>-->
 
-        <input type="button" form="authorization" class="buttonAuth" id="buttonAuth" value="Log in" onclick="reloadButAuth();">
+        <!--<input type="button" form="authorization" class="buttonAuth" id="buttonAuth" value="Log in" onclick="reloadButAuth();">-->
+        <!--<script>-->
+            <!--function reloadButAuth() {-->
+                <!--logIn();-->
+                <!--var elm = document.getElementById("buttonAuth");-->
+                <!--elm.style.animation = "hideElement .7s";-->
+                <!--var newone = elm.cloneNode(true);-->
+                <!--elm.parentNode.replaceChild(newone, elm);-->
+            <!--}-->
+        <!--</script>-->
+        <!--<input type="button" class="buttonReg" id="buttonReg" value="Sign up" onclick="reloadButReg();">-->
+        <!--<script>-->
+            <!--function reloadButReg() {-->
+                <!--signUp();-->
+                <!--var elm = document.getElementById("buttonReg");-->
+                <!--elm.style.animation = "hideElement .7s";-->
+                <!--var newone = elm.cloneNode(true);-->
+                <!--elm.parentNode.replac   eChild(newone, elm);-->
+            <!--}-->
+        <!--</script>-->
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
         <script>
-            function reloadButAuth() {
-                logIn();
-                var elm = document.getElementById("buttonAuth");
-                elm.style.animation = "hideElement .7s";
-                var newone = elm.cloneNode(true);
-                elm.parentNode.replaceChild(newone, elm);
-            }
-        </script>
-        <input type="button" class="buttonReg" id="buttonReg" value="Sign up" onclick="reloadButReg();">
-        <script>
-            function reloadButReg() {
-                signUp();
-                var elm = document.getElementById("buttonReg");
-                elm.style.animation = "hideElement .7s";
-                var newone = elm.cloneNode(true);
-                elm.parentNode.replaceChild(newone, elm);
-            }
-        </script>
+	function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId());
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
+      console.log('id_token: ' + googleUser.getAuthResponse().id_token);
+
+     //do not post above info to the server because that is not safe.
+     //just send the id_token
+
+      var redirectUrl = 'login';
+      //using jquery to post data dynamically
+      var form = $('<form action="' + redirectUrl + '" method="post">' +
+                          '<input type="text" name="id_token" value="' +
+                           googleUser.getAuthResponse().id_token + '" />' +
+                                                                '</form>');
+    $('body').append(form);
+    form.submit();
+    }
+
+	</script>
     </div>
     <div class="globalShadow" id="globalShadow" onclick="deleteAll()">
         <script type="text/javascript">
@@ -81,21 +110,17 @@
     </div>
     <!--logo-->
     <div class="logo">
-        <img src="../resources/logo(noteCoin).png" width="500" , height="125">
-    </div>
-    <!--version-->
-    <div id="version" class="version">
-        <h5>v1.0 PreAlpha b:31.03.18</h5>
+        <img src="resources/logo(noteCoin).png" width="500" , height="125">
     </div>
     <!--blocks-->
     <div class="block">
         <div class="column-left" id="column-left">
-            <div style="width: 0; height: 300px;"></div>
+            <div style="width: 0; height: 370px;"></div>
             <script type="text/javascript">
-                var link = document.querySelector('#lastTrans');
+                var link = document.querySelector('#updatesBlock');
 
                 // Clone the <template> in the import.
-                var template = link.import.querySelector('#tmplLastTran');
+                var template = link.import.querySelector('#tmplUpdates');
                 var clone = document.importNode(template.content, true);
 
                 document.querySelector('#column-left').appendChild(clone);
@@ -105,13 +130,22 @@
     </div>
     <div class="block">
         <div class="column-middle" id="column-middle">
-            <div style="width: 0; height: 300px;"></div>
+            <div style="width: 0; height: 370px;"></div>
+            <script type="text/javascript">
+                var link = document.querySelector('#lastTrans');
+                
+                // Clone the <template> in the import.
+                var template = link.import.querySelector('#tmplLastTran');
+                var clone = document.importNode(template.content, true);
+
+                document.querySelector('#column-middle').appendChild(clone);
+            </script>
             <div style="width: 0; height: 700px;"></div>
         </div>
     </div>
     <div class="block">
         <div class="column-right" id="column-right">
-            <div style="width: 0; height: 300px;"></div>
+            <div style="width: 0; height: 370px;"></div>
             <script type="text/javascript">
                 var link = document.querySelector('#newTran');
 

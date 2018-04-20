@@ -31,6 +31,8 @@ html body{
 Clear Blocks
 <<<<<<<<<<<<*/
 .block{
+    font-family: 'Josefin Sans', sans-serif;
+    
     position: relative;
     width: 420px;
     height: 700px;
