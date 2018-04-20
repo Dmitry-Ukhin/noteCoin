@@ -18,36 +18,34 @@
     <link id="newTran" href="pages/template/tmplNewTran.html" rel="import">
     <link id="showTrans" href="pages/template/tmplShowTrans.html" rel="import">
     <link id="listTrans" href="pages/template/tmplListTrans.html" rel="import">
+    <link id="updatesBlock" href="pages/template/tmplUpdates.html" rel="import">
     <!--Import stylesheets-->
-    <link href="../styles/index.css" rel="stylesheet">
-    <link href="../styles/newTran.css" rel="stylesheet">
-    <link href="../styles/lastTrans.css" rel="stylesheet">
-    <link href="../styles/showTrans.css" rel="stylesheet">
-    <link href="../styles/listTrans.css" rel="stylesheet">
+    <link href="styles/index.css" rel="stylesheet">
+    <link href="styles/newTran.css" rel="stylesheet">
+    <link href="styles/lastTrans.css" rel="stylesheet">
+    <link href="styles/showTrans.css" rel="stylesheet">
+    <link href="styles/listTrans.css" rel="stylesheet">
+    <link href="styles/updates.css" rel="stylesheet">
     <!--Import scripts-->
-    <script src="../scripts/saveTran.js"></script>
-    <script src="../scripts/lastTrans.js"></script>
+    <script src="scripts/saveTran.js"></script>
+    <script src="scripts/lastTrans.js"></script>
     <!--Other imports-->
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
 </head>
 <body>
     <!--logo-->
     <div class="logo">
-        <img src="../resources/logo(noteCoin).png" width="500" , height="125">
-    </div>
-    <!--version-->
-    <div id="version" class="version">
-        <h5>v1.0 PreAlpha b:31.03.18</h5>
+        <img src="resources/logo(noteCoin).png" width="500" , height="125">
     </div>
     <!--blocks-->
     <div class="block">
         <div class="column-left" id="column-left">
-            <div style="width: 0; height: 300px;"></div>
+            <div style="width: 0; height: 370px;"></div>
             <script type="text/javascript">
-                var link = document.querySelector('#lastTrans');
+                var link = document.querySelector('#updatesBlock');
 
                 // Clone the <template> in the import.
-                var template = link.import.querySelector('#tmplLastTran');
+                var template = link.import.querySelector('#tmplUpdates');
                 var clone = document.importNode(template.content, true);
 
                 document.querySelector('#column-left').appendChild(clone);
@@ -57,13 +55,22 @@
     </div>
     <div class="block">
         <div class="column-middle" id="column-middle">
-            <div style="width: 0; height: 300px;"></div>
+            <div style="width: 0; height: 370px;"></div>
+            <script type="text/javascript">
+                var link = document.querySelector('#lastTrans');
+
+                // Clone the <template> in the import.
+                var template = link.import.querySelector('#tmplLastTran');
+                var clone = document.importNode(template.content, true);
+
+                document.querySelector('#column-middle').appendChild(clone);
+            </script>
             <div style="width: 0; height: 700px;"></div>
         </div>
     </div>
     <div class="block">
         <div class="column-right" id="column-right">
-            <div style="width: 0; height: 300px;"></div>
+            <div style="width: 0; height: 370px;"></div>
             <script type="text/javascript">
                 var link = document.querySelector('#newTran');
 

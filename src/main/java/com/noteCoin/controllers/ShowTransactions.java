@@ -66,7 +66,6 @@ public class ShowTransactions extends HttpServlet{
         /*
         Get data from data base
          */
-
         TransactionDAO transactionDAO = new TransactionDAOHibernate();
         List<Transaction> transactionList = transactionDAO.getList(query);
 
@@ -75,7 +74,7 @@ public class ShowTransactions extends HttpServlet{
                 resp.getWriter().printf(ToJSON.convert(tr));
             }
         } else {
-            resp.getWriter().println("Download is fail");
+            resp.getWriter().println("fail");
         }
     }
 }

@@ -1,0 +1,18 @@
+.form-Updates {
+    width: 90% !important;
+    height: 100% !important;
+}
+
+.head-Updates {
+    text-align: center;
+    background: #16a6d1;
+}
+
+.text {
+    position: relative;
+    width: 90%;
+    top: -12px;
+    
+    text-align: left;
+    font-size: 18px;
+}

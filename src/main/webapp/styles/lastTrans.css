@@ -2,6 +2,7 @@
 Last three transactions
 <<<<<<<<<<<<<<*/
 .form-lastTrans{
+    margin-left: 15%;
     width: 80% !important;
     height: 220px;
 }

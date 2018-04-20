@@ -53,6 +53,8 @@ function loadTrans(idForm) {
         if (this.readyState === 4 && this.status === 200) {
             if (xhr.responseText !== "") {
                 insertResp(xhr.responseText);
+            }else if(xhr.responseText === "fail"){
+                document.getElementById("div-Wait").innerHTML="Fail, try later";
             }else{
                 document.getElementById("div-Wait").innerHTML="Nothing";
             }
