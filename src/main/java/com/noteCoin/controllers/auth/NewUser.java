@@ -1,4 +1,4 @@
-package com.noteCoin.controllers;
+package com.noteCoin.controllers.auth;
 
 import com.noteCoin.data.dao.UserDAO;
 import com.noteCoin.data.UserDAOHibernate;

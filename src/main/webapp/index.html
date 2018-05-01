@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116702748-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-116702748-1"></script>-->
+    <!--<script>-->
+        <!--window.dataLayer = window.dataLayer || [];-->
+        <!--function gtag(){dataLayer.push(arguments);}-->
+        <!--gtag('js', new Date());-->
 
-        gtag('config', 'UA-116702748-1');
-    </script>
+        <!--gtag('config', 'UA-116702748-1');-->
+    <!--</script>-->
 
     <meta charset="UTF-8">
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id"
-          content="952926237350-nm6l0h72hi86onaafedh87j8schgdhcs.apps.googleusercontent.com">
+          content="123557132319-1p0flucik6sh5belbh9l2f1gi3kpk1ui.apps.googleusercontent.com">
 
 
     <title>noteCoin</title>
@@ -34,7 +34,7 @@
     <!--Import scripts-->
     <script src="scripts/saveTran.js"></script>
     <script src="scripts/lastTrans.js"></script>
-    <script src="scripts/authorization.js"></script>
+    <!--<script src="scripts/authorization.js"></script>-->
 
         <!--Google Oauth-->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -48,31 +48,40 @@
         <div id="headerAuth" class="headerAuth">
             <h4 class="headerAuth-h4">Welcome to the noteCoin</h4>
         </div>
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        <script>
-        <!--COPY-PASTE-->
-            function onSignIn(googleUser) {
-              var profile = googleUser.getBasicProfile();
-              console.log('ID: ' + profile.getId());
-              console.log('Name: ' + profile.getName());
-              console.log('Image URL: ' + profile.getImageUrl());
-              console.log('Email: ' + profile.getEmail());
-              console.log('id_token: ' + googleUser.getAuthResponse().id_token);
+        <div id="body-authorization" class="body-authorization">
+        <!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
+            <script>
+            //COPY-PASTE
 
-             //do not post above info to the server because that is not safe.
-             //just send the id_token
+                    let URI = "/auth";
+                    let HTTP_METHOD = "GET";
+                    const ASYN = false;
+                    let xhr = new XMLHttpRequest();
 
-              var redirectUrl = 'login';
-              //using jquery to post data dynamically
-              var form = $('<form action="' + redirectUrl + '" method="post">' +
-                                  '<input type="text" name="id_token" value="' +
-                                   googleUser.getAuthResponse().id_token + '" />' +
-                                                                        '</form>');
-            $('body').append(form);
-            form.submit();
-            }
+                    if (xhr !== null) {
+                        xhr.open(HTTP_METHOD, URI, ASYN);
+                        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                        if (xhr.readyState === 1) {
+                            xhr.send();
+                        } else {
+                            console.error("readyState != 1");
+                        }
+                    }
+                    let responseText = xhr.responseText;
 
-	</script>
+                    console.log("Resp: " + responseText);
+
+                    let elementAuth = document.getElementById("div-authorization");
+                    if (null !== elementAuth){
+                        elementAuth.innerHTML = responseText;
+                    }else{
+                        console.log("couldn't found element");
+                    }
+
+                // }
+
+            </script>
+        </div>
     </div>
     <div class="globalShadow" id="globalShadow" onclick="deleteAll()">
         <script type="text/javascript">

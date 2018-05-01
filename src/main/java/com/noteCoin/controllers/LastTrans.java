@@ -24,7 +24,7 @@ public class LastTrans extends HttpServlet{
 
         if (limitedList != null) {
             for (Transaction tr : limitedList) {
-                resp.getWriter().printf(ToJSON.convert(tr));
+                resp.getWriter().print(ToJSON.convert(tr));
             }
         } else {
             resp.getWriter().println("Download is fail");

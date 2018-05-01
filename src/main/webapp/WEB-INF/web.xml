@@ -1,10 +1,7 @@
-<!--
-    last change 18.03.18 21:58
--->
 <web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
 	<display-name>noteCoin</display-name>
 	<welcome-file-list>
-		<welcome-file>pages/index.html</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 	<servlet>
@@ -41,19 +38,11 @@
         <url-pattern>/remove</url-pattern>
     </servlet-mapping>
 	<servlet>
-		<servlet-name>login</servlet-name>
-		<servlet-class>com.noteCoin.controllers.Authorization</servlet-class>
+		<servlet-name>auth</servlet-name>
+		<servlet-class>com.noteCoin.controllers.auth.AuthController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>login</servlet-name>
-		<url-pattern>/user</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>signup</servlet-name>
-		<servlet-class>com.noteCoin.controllers.NewUser</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>signup</servlet-name>
-		<url-pattern>/sign_up</url-pattern>
+		<servlet-name>auth</servlet-name>
+		<url-pattern>/auth</url-pattern>
 	</servlet-mapping>
 </web-app>
